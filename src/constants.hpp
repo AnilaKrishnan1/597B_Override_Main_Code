@@ -18,8 +18,4 @@ namespace Constants {
     static constexpr unsigned char intake_mid_p = 2;
     static constexpr unsigned char intake_btm_p = 3;
 
-    //rotation sensors
-    static constexpr unsigned char perp_sns = 10;
-    static constexpr unsigned char str_sns = 11;
-
 }

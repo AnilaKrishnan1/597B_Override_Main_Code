@@ -86,14 +86,16 @@ void opcontrol() {
 	//intake
 		if (master.get_digital(E_CONTROLLER_DIGITAL_R1)) {
 			in.floor(127);
-			in.Intake_top_mtr.move(0);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
 			in.floor(-127);
-			in.Intake_top_mtr.move(0);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+			in.storage(127);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
+			in.storage(-127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			in.top_level(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
-			in.mid_level(127);
+			in.mid_level(-127);
 		} else {
 			in.resting();
 		}
