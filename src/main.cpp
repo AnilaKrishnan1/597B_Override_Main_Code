@@ -1,9 +1,18 @@
 #include "main.h"
 #include "drivetrain.hpp"
 #include "intake.hpp"
+//#include "vex.h"
+//#include <pros/screen.hpp>
+#include "matchload.hpp"
+//#include lemlib
+#include "lemlib/api.hpp" // IWYU pragma: keep
+#include "lemlib-tarball/api.hpp"
+ASSET(lowerGoalScorePath_txt);
+lemlib_tarball::Decoder decoder(lowerGoalScorePath_txt);
+
 using namespace pros;
-DriveTrain dt;
 Intake in;
+Matchload match;
 /**
  * A callback function for LLEMU's center button.
  *
@@ -11,13 +20,7 @@ Intake in;
  * "I was pressed!" and nothing.
  */
 void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
+	
 }
 
 /**
@@ -26,12 +29,9 @@ void on_center_button() {
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
-void initialize() {
-	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
-
-	pros::lcd::register_btn1_cb(on_center_button);
-}
+// void initialize() {
+// 	pros::lcd::initialize();
+// }
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -62,7 +62,16 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+	resetCoordinateSystem();
+	in.storage(120);
+	follow(decoder["Path1"],2, 2000);
+
+}
+  	
+
+
+
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -79,18 +88,18 @@ void autonomous() {}
  */
 void opcontrol() {
 	Controller master(CONTROLLER_MASTER);
-	
+	int matchET = 0;
 	while (true) {
 	//tankdrive
-		dt.tankDrive(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_Y));
+		arcadeDrive(master.get_analog(ANALOG_LEFT_Y),master.get_analog(ANALOG_RIGHT_X));
 	//intake
-		if (master.get_digital(E_CONTROLLER_DIGITAL_R1)) {
+		if (master.get_digital(E_CONTROLLER_DIGITAL_A)) {
 			in.floor(127);
-		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
 			in.floor(-127);
-		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			in.storage(127);
-		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)){
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
 			in.storage(-127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			in.top_level(127);
@@ -98,6 +107,11 @@ void opcontrol() {
 			in.mid_level(-127);
 		} else {
 			in.resting();
+		}
+
+	//matchload mech
+		if (master.get_digital(E_CONTROLLER_DIGITAL_UP) && (millis() - matchET > 500)){
+			match.open(); matchET = millis();
 		}
 	}
 }
