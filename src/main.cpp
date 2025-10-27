@@ -64,10 +64,10 @@ void competition_initialize() {}
  */
 void autonomous() {
 	resetCoordinateSystem();
-	in.storage(120);
 	//follow(decoder["Path1"],2, 2000);
-	chassis.setPose(0,0,0)
-	in.floor(127)
+	//chassis.setPose(0,0,0)
+	chassis.setPose(61.696,21.933,90)
+	in.storage(120);
 	chassis.moveToPoint(27.88,21.933,2500);
 	chassis.turnToHeading(230, 750)
 	chassis.moveToPoint(12.102,9.966,1500);
