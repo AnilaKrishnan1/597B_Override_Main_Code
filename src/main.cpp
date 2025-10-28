@@ -65,17 +65,19 @@ void competition_initialize() {}
 void autonomous() {
 	resetCoordinateSystem();
 	//follow(decoder["Path1"],2, 2000);
-	//chassis.setPose(0,0,0)
-	chassis.setPose(61.696,21.933,90)
+	//chassis.setPose(0,0,0);
+	//chassis.setPose(61.696,21.933,90);
 	in.storage(120);
-	chassis.moveToPoint(27.88,21.933,2500);
-	chassis.turnToHeading(230, 750)
+	chassis.moveToPoint(0,16,700);
+	/** 
+	chassis.turnToHeading(230, 750);
 	chassis.moveToPoint(12.102,9.966,1500);
-	in.floor(-127)
-	chassis.turnToHeading(30, 750)
+	in.floor(-127);
+	chassis.turnToHeading(30, 750);
 	chassis.moveToPoint(39.245,47.26,1500);
-	chassis.turnToHeading(270,750)
-	chassis.moveToPoint(32.845,47.26,1500)
+	chassis.turnToHeading(270,750);
+	chassis.moveToPoint(32.845,47.26,1500);
+	*/
 }
   	
 

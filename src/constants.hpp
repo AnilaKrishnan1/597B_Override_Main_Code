@@ -21,7 +21,7 @@ namespace Constants {
 
     //sensors
     static constexpr unsigned char horizontal_p = 18;
-    static constexpr unsigned char vertical_p = 19;
+    static constexpr unsigned char vertical_p = 11;
     static constexpr unsigned char inertial_p = 4;
 
     //odom shit
