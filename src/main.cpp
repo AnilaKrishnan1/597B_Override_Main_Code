@@ -68,8 +68,17 @@ void autonomous() {
 	//chassis.setPose(0,0,0);
 	//chassis.setPose(61.696,21.933,90);
 	in.storage(120);
-	chassis.moveToPoint(0,16,700);
-	/** 
+	chassis.moveToPoint(0,24,1300 ,{.maxSpeed = 80});
+	c::delay(500);
+	chassis.turnToHeading(-70, 800,{.maxSpeed = 40});
+	c::delay(500);
+	resetCoordinateSystem();
+	c::delay(500);
+	//chassis.moveToPoint(0,10,300 ,{.maxSpeed = 80});
+	//c::delay(500);
+	chassis.moveToPoint(0,8,300 ,{.maxSpeed = 80});
+	/** chassis.moveToPoint(0,5,300);
+	
 	chassis.turnToHeading(230, 750);
 	chassis.moveToPoint(12.102,9.966,1500);
 	in.floor(-127);
