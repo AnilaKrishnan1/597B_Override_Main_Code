@@ -64,29 +64,9 @@ void competition_initialize() {}
  */
 void autonomous() {
 	resetCoordinateSystem();
-	//follow(decoder["Path1"],2, 2000);
-	//chassis.setPose(0,0,0);
-	//chassis.setPose(61.696,21.933,90);
-	in.storage(120);
-	chassis.moveToPoint(0,24,1300 ,{.maxSpeed = 80});
+	chassis.moveToPoint(0,16,1000 ,{.maxSpeed = 80});
 	c::delay(500);
-	chassis.turnToHeading(-70, 800,{.maxSpeed = 40});
-	c::delay(500);
-	resetCoordinateSystem();
-	c::delay(500);
-	//chassis.moveToPoint(0,10,300 ,{.maxSpeed = 80});
-	//c::delay(500);
-	chassis.moveToPoint(0,8,300 ,{.maxSpeed = 80});
-	/** chassis.moveToPoint(0,5,300);
-	
-	chassis.turnToHeading(230, 750);
-	chassis.moveToPoint(12.102,9.966,1500);
-	in.floor(-127);
-	chassis.turnToHeading(30, 750);
-	chassis.moveToPoint(39.245,47.26,1500);
-	chassis.turnToHeading(270,750);
-	chassis.moveToPoint(32.845,47.26,1500);
-	*/
+	chassis.moveToPoint(0,-26,1300 ,{.maxSpeed = 120});
 }
   	
 

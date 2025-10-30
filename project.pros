@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Arcade Anya",
+    "project_name": "Skills Autonomous",
     "target": "v5",
     "templates": {
       "LemLib": {
@@ -654,7 +654,7 @@
     "upload_options": {
       "description": "Main code testing for major errors",
       "icon": "ufo",
-      "slot": 2
+      "slot": 3
     },
     "use_early_access": false
   }
