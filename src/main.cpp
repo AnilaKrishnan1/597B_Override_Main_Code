@@ -64,9 +64,10 @@ void competition_initialize() {}
  */
 void autonomous() {
 	resetCoordinateSystem();
-	chassis.moveToPoint(0,16,1000 ,{.maxSpeed = 80});
-	c::delay(500);
-	chassis.moveToPoint(0,-26,1300 ,{.maxSpeed = 120});
+	chassis.moveToPoint(0,-16,1000 ,{.maxSpeed = 80});
+	//c::delay(500);
+	resetCoordinateSystem();
+	chassis.moveToPoint(0,26,1300 ,{.maxSpeed = 200});
 }
   	
 
