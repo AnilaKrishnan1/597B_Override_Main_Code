@@ -64,9 +64,18 @@ void competition_initialize() {}
  */
 void autonomous() {
 	resetCoordinateSystem();
-	chassis.moveToPoint(0,16,1000 ,{.forwards = false});
-	c::delay(500);
-	chassis.moveToPoint(0,-26,1300 ,{.maxSpeed = 120});
+	chassis.moveToPoint(0,18,1500,{.maxSpeed = 60});
+	c::delay(1500);
+	chassis.turnToHeading(90, 1000,{.maxSpeed = 40});
+	match.open(); 
+	c::delay(1500);
+	resetCoordinateSystem();
+	chassis.setPose(0,0,50); 
+	chassis.turnToHeading(90, 400,{.maxSpeed = 40});
+	chassis.moveToPoint(10,13,400,{.forwards=true});
+	c::delay(1500);
+	in.storage(127);
+	c::delay(5000);
 }
   	
 
