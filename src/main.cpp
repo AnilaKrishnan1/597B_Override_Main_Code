@@ -63,7 +63,18 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	resetCoordinateSystem();
+	chassis.setPose(0,0,90);
+	chassis.moveToPoint(18,0,1500,{.maxSpeed = 60});
+	c::delay(1500);
+	chassis.turnToHeading(180, 1500,{.maxSpeed = 40});
+	match.open(); 
+	chassis.moveToPoint(18,-8,1100,{.maxSpeed = 60});
+	in.storage(127); // intakes blocks from matchload
+	c::delay(5000);
+	chassis.moveToPoint(18,12,1100,{.forwards = false,.maxSpeed = 60}); //scores on high goal
+}
+  	
+/*resetCoordinateSystem();
 	chassis.moveToPoint(0,18,1500,{.maxSpeed = 60});
 	c::delay(1500);
 	chassis.turnToHeading(90, 1000,{.maxSpeed = 40});
@@ -72,12 +83,18 @@ void autonomous() {
 	resetCoordinateSystem();
 	chassis.setPose(0,0,50); 
 	chassis.turnToHeading(90, 400,{.maxSpeed = 40});
-	chassis.moveToPoint(10,13,400,{.forwards=true});
+	chassis.moveToPoint(10,11,400,{.forwards=true});
 	c::delay(1500);
 	in.storage(127);
-	c::delay(5000);
-}
-  	
+	c::delay(5000);*/
+
+
+
+
+
+
+
+
 
 
 
@@ -102,6 +119,21 @@ void opcontrol() {
 	//tankdrive
 		arcadeDrive(master.get_analog(ANALOG_LEFT_Y),master.get_analog(ANALOG_RIGHT_X));
 	//intake
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+			in.storage(127);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
+			in.storage(-127);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+			in.top_level(127);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
+			in.mid_level(127);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
+			in.storage_middle(127);
+		} else {
+			in.resting();
+		}
+
+/*
 		if (master.get_digital(E_CONTROLLER_DIGITAL_A)) {
 			in.floor(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
@@ -117,7 +149,7 @@ void opcontrol() {
 		} else {
 			in.resting();
 		}
-
+		*/
 	//matchload mech
 		if (master.get_digital(E_CONTROLLER_DIGITAL_UP) && (millis() - matchET > 500)){
 			match.open(); matchET = millis();
