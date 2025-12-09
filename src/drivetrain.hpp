@@ -14,12 +14,12 @@ pros::Rotation horizontalEnc(horizontal_p);
 // vertical tracking wheel encoder. Rotation sensor, port 11, reversed
 pros::Rotation verticalEnc(vertical_p);
 // horizontal tracking wheel. 2.75" diameter, 5.75" offset, back of the robot (negative)
-lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::NEW_275, -5.75);
+lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::OLD_275, -5.75);
 
 // MEASURE OFFSET WHEN ON THE ROBOT
 
 // vertical tracking wheel. 2.75" diameter, 2.5" offset, left of the robot (negative)
-lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::NEW_275, -2.5);
+lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::OLD_275, -2.5);
 
 pros::Imu imu(inertial_p);
 
@@ -28,8 +28,8 @@ lemlib::OdomSensors sensors(&vertical, nullptr, &horizontal, nullptr, &imu);
 // drivetrain settings
 lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
                               &rightMotors, // right motor group
-                              10, // 10 inch track width
-                              lemlib::Omniwheel::NEW_4, // using new 4" omnis
+                              12, // 12 inch track width
+                              lemlib::Omniwheel::OLD_275, // using new 2.75" omnis
                               360, // drivetrain rpm is 360
                               2 // horizontal drift is 2. If we had traction wheels, it would have been 8
 );

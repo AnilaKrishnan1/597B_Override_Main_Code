@@ -17,26 +17,26 @@ class Intake{
     Intake_mid_mtr.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
     Intake_btm_mtr.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }
-    inline void floor(int voltage){
-        Intake_mid_mtr.move(voltage);
-    }
     inline void storage(int voltage){
-        Intake_btm_mtr.move(voltage);
-        Intake_mid_mtr.move(voltage);
+        Intake_btm_mtr.move(-1*voltage);
+    }
+    inline void storage_middle(int voltage){
+        Intake_btm_mtr.move(-1*voltage);
+        Intake_mid_mtr.move(-1*voltage);
     }
     inline void top_level(int voltage){
-        Intake_mid_mtr.move(voltage);
         Intake_top_mtr.move(voltage);
+        Intake_mid_mtr.move(-1*voltage);
         Intake_btm_mtr.move(-1*voltage);
     }
     inline void mid_level(int voltage){
-        Intake_btm_mtr.move(voltage);
-        Intake_mid_mtr.move(-1 * voltage);
-        Intake_top_mtr.move(voltage);
+        Intake_btm_mtr.move(-1*voltage);
+        Intake_mid_mtr.move(-1*voltage);
+        Intake_top_mtr.move(-1*voltage);
     }
     inline void resting(){
         Intake_btm_mtr.move(0);
-        Intake_mid_mtr.move(0);
         Intake_top_mtr.move(0);
+        Intake_mid_mtr.move(0);
     }
 };  
