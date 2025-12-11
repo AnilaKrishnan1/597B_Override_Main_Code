@@ -4,6 +4,7 @@
 //#include "vex.h"
 //#include <pros/screen.hpp>
 #include "matchload.hpp"
+#include "matchload2.hpp"
 //#include lemlib
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "lemlib-tarball/api.hpp"
@@ -13,6 +14,7 @@ lemlib_tarball::Decoder decoder(lowerGoalScorePath_txt);
 using namespace pros;
 Intake in;
 Matchload match;
+Matchload2 match2;
 /**
  * A callback function for LLEMU's center button.
  *
@@ -64,7 +66,7 @@ void competition_initialize() {}
  */
 void autonomous() {
 	resetCoordinateSystem();
-<<<<<<< HEAD
+
 	chassis.setPose(0,16,0);
 	chassis.moveToPoint(0, 0, 500, {.maxSpeed = 200});
 	/*
@@ -93,7 +95,6 @@ void autonomous() {
 	chassis.moveToPoint(0,26,1300 ,{.maxSpeed = 500});
 	*/
 	
-=======
 	chassis.moveToPoint(0,18,1500,{.maxSpeed = 60});
 	c::delay(1500);
 	chassis.turnToHeading(90, 1000,{.maxSpeed = 40});
@@ -106,7 +107,6 @@ void autonomous() {
 	c::delay(1500);
 	in.storage(127);
 	c::delay(5000);
->>>>>>> 88d3a1e5c286a027e76e039ca835a1ab66f13940
 }
   	
 
@@ -133,18 +133,16 @@ void opcontrol() {
 	//tankdrive
 		arcadeDrive(master.get_analog(ANALOG_LEFT_Y),master.get_analog(ANALOG_RIGHT_X));
 	//intake
-		if (master.get_digital(E_CONTROLLER_DIGITAL_A)) {
-			in.floor(127);
-		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
-			in.floor(-127);
-		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			in.storage(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
 			in.storage(-127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			in.top_level(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
-			in.mid_level(-127);
+			in.mid_level(127);
+		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
+			in.storage_middle(127);
 		} else {
 			in.resting();
 		}
@@ -152,6 +150,9 @@ void opcontrol() {
 	//matchload mech
 		if (master.get_digital(E_CONTROLLER_DIGITAL_UP) && (millis() - matchET > 500)){
 			match.open(); matchET = millis();
+		}
+		if (master.get_digital(E_CONTROLLER_DIGITAL_DOWN) && (millis() - matchET > 500)){
+			match2.open(); matchET = millis();
 		}
 	}
 }

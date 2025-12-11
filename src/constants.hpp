@@ -31,6 +31,7 @@ namespace Constants {
 
     //piston
     static constexpr unsigned char Matchloader_p = 'A';
+    static constexpr unsigned char Matchloader_p2 = 'B';
     //drivetrain
     constexpr int threshold = 10; // Joystick deadzone (7–10%)
 
