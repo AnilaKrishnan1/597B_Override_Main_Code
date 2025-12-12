@@ -65,35 +65,48 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	chassis.setPose(0,0,90);
+	chassis.moveToPoint(18,0,1200,{.maxSpeed = 60});
+	c::delay(1500);
+	chassis.turnToHeading(90, 1300,{.maxSpeed = 40});
+	match.open(); 
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(8,-5,500,{.maxSpeed = 60}); // change after testing to be faster and ram into it
+	
+	in.storage(127); // intakes blocks from matchload
+	c::delay(3000); // change to 5000 after testing -------
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(0,-10,1700,{.forwards = false,.maxSpeed = 60}); //scores on high goal
+	match.open();
+	in.top_level(127);
+	c::delay(3000); // change after testing ------
+	in.resting();
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(0,6,700,{.maxSpeed = 60});
+	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(7,28,4000,{.maxSpeed = 60}); // moves across the field 
+	chassis.setPose(0,0,0);
+	chassis.turnToHeading(-90, 1600,{.maxSpeed = 40});
+	match.open(); 
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(-15,0,1100,{.maxSpeed = 60});
+	
+	//in.storage(127); // intakes blocks from matchload
+	//c::delay(3000); // change to 5000 after testing -------
+	//chassis.setPose(0,0,0);
+	//chassis.moveToPoint(-1,-10,1700,{.forwards = false,.maxSpeed = 60}); //scores on high goal*/
+
+
+
+
+
+
+/*
 	resetCoordinateSystem();
 
 	chassis.setPose(0,16,0);
 	chassis.moveToPoint(0, 0, 500, {.maxSpeed = 200});
-	/*
-	resetCoordinateSystem();
-	chassis.moveToPoint(0, 16, 500, {.maxSpeed = 200});
-	in.storage(127);
-	chassis.moveToPose(0, -16, 180,1000, {.maxSpeed = 500});
-	resetCoordinateSystem();
-	c::delay(500);
-	chassis.moveToPoint(0, -50, 1000, {.maxSpeed = 1000});
-
-	//chassis.moveToPoint(0, 16, 2000, {.maxSpeed = 500});
-
-
-	/*chassis.moveToPoint(0,-16,1000 ,{.maxSpeed = 80});
-	//c::delay(500);
-	resetCoordinateSystem();
-	in.storage(127);
-	chassis.moveToPoint(0,26,1300 ,{.maxSpeed = 500});
-	
-	/*
-	chassis.moveToPoint(0,16,1500 ,{.maxSpeed = -80});
-	c::delay(500);
-	resetCoordinateSystem();
-	in.storage(127);
-	chassis.moveToPoint(0,26,1300 ,{.maxSpeed = 500});
-	*/
 	
 	chassis.moveToPoint(0,18,1500,{.maxSpeed = 60});
 	c::delay(1500);
@@ -107,6 +120,7 @@ void autonomous() {
 	c::delay(1500);
 	in.storage(127);
 	c::delay(5000);
+	*/
 }
   	
 
@@ -151,7 +165,7 @@ void opcontrol() {
 		if (master.get_digital(E_CONTROLLER_DIGITAL_UP) && (millis() - matchET > 500)){
 			match.open(); matchET = millis();
 		}
-		if (master.get_digital(E_CONTROLLER_DIGITAL_DOWN) && (millis() - matchET > 500)){
+		if (master.get_digital(E_CONTROLLER_DIGITAL_X) && (millis() - matchET > 500)){
 			match2.open(); matchET = millis();
 		}
 	}
