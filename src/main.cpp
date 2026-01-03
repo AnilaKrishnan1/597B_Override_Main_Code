@@ -14,7 +14,7 @@ lemlib_tarball::Decoder decoder(lowerGoalScorePath_txt);
 using namespace pros;
 Intake in;
 Matchload match;
-Matchload2 match2;
+Matchload2 blocker;
 /**
  * A callback function for LLEMU's center button.
  *
@@ -66,61 +66,85 @@ void competition_initialize() {}
  */
 void autonomous() {
 	chassis.setPose(0,0,90);
-	chassis.moveToPoint(18,0,1200,{.maxSpeed = 60});
+	chassis.moveToPoint(14,0,990,{.maxSpeed = 60});
 	c::delay(1500);
 	chassis.turnToHeading(90, 1300,{.maxSpeed = 40});
 	match.open(); 
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(8,-5,500,{.maxSpeed = 60}); // change after testing to be faster and ram into it
-	
+	chassis.moveToPoint(13,-8,1100,{.maxSpeed = 200}); // change after testing to be faster and ram into it
+	blocker.open(); 
 	in.storage(127); // intakes blocks from matchload
-	c::delay(3000); // change to 5000 after testing -------
+	c::delay(4000); // change after testing -------
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,-10,1700,{.forwards = false,.maxSpeed = 60}); //scores on high goal
-	match.open();
-	in.top_level(127);
-	c::delay(3000); // change after testing ------
+	
+	chassis.moveToPoint(1,-6,900,{.forwards = false,.maxSpeed = 60});
 	in.resting();
+	c::delay(2000);
+	match.open(); // closes matchload
+	blocker.open(); 
+	c::delay(1000);
+	in.top_level(127); //scores on high goal
+	c::delay(6000); // change after testing ------
+	in.resting();
+
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,6,700,{.maxSpeed = 60});
+	chassis.moveToPoint(0,5,500,{.maxSpeed = 60}); // moves back
+	in.storage(-127);
+	c::delay(1500);
+	in.resting();
 	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(7,28,4000,{.maxSpeed = 60}); // moves across the field 
+	chassis.moveToPoint(7,20,3960,{.maxSpeed = 60}); // moves across the field 
 	chassis.setPose(0,0,0);
 	chassis.turnToHeading(-90, 1600,{.maxSpeed = 40});
 	match.open(); 
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(-15,0,1100,{.maxSpeed = 60});
-	
-	//in.storage(127); // intakes blocks from matchload
-	//c::delay(3000); // change to 5000 after testing -------
-	//chassis.setPose(0,0,0);
-	//chassis.moveToPoint(-1,-10,1700,{.forwards = false,.maxSpeed = 60}); //scores on high goal*/
+	chassis.moveToPoint(-15,-8,1100,{.maxSpeed = 130});
 
-
-
-
-
+	blocker.open(); 
+	in.storage(127); // intakes blocks from matchload
+	c::delay(4000); // change after testing -------
+	chassis.setPose(0,0,0);
+	//chassis.moveToPoint(-1,-10,1700,{.forwards = false,.maxSpeed = 60}); //scores on high goal
+	//match.open();
+	//blocker.open();
+	//in.top_level(127); //scores on high goal
+	//c::delay(6000); // change after testing ------
+	//in.resting();
+/*
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(0,10,1100,{.maxSpeed = 60}); // moves back
+	chassis.setPose(0,0,0);
+	chassis.turnToHeading(-90, 1500,{.maxSpeed = 40});
+	chassis.moveToPoint(10,0,800,{.maxSpeed = 60}); // moves right
+	chassis.turnToHeading(0, 1500,{.maxSpeed = 40});
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(0,30,4000,{.maxSpeed = 60}); // moves across left long goal
+	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
+	chassis.moveToPoint(10,0,800,{.maxSpeed = 60}); // moves left towards matchload
+	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
+	chassis.setPose(0,0,0);
+*/
 
 /*
-	resetCoordinateSystem();
 
-	chassis.setPose(0,16,0);
-	chassis.moveToPoint(0, 0, 500, {.maxSpeed = 200});
-	
-	chassis.moveToPoint(0,18,1500,{.maxSpeed = 60});
-	c::delay(1500);
-	chassis.turnToHeading(90, 1000,{.maxSpeed = 40});
-	match.open(); 
-	c::delay(1500);
-	resetCoordinateSystem();
-	chassis.setPose(0,0,50); 
-	chassis.turnToHeading(90, 400,{.maxSpeed = 40});
-	chassis.moveToPoint(10,13,400,{.forwards=true});
-	c::delay(1500);
-	in.storage(127);
-	c::delay(5000);
-	*/
+	match.open(); //opens matchload
+	chassis.moveToPoint(0,15,1100,{.maxSpeed = 60});
+	in.storage(127); // intakes blocks from matchload
+	c::delay(4000); // change after testing -------
+	chassis.setPose(0,0,0);
+*/
+
+/*
+	chassis.moveToPoint(0,-10,1400,{.forwards = false,.maxSpeed = 60});
+	in.resting();
+	blocker.open(); 
+	c::delay(2000);
+	match.open(); // closes matchload
+	in.top_level(127); //scores on high goal
+	c::delay(6000); // change after testing ------
+	in.resting();
+*/
 }
   	
 
@@ -148,25 +172,25 @@ void opcontrol() {
 		arcadeDrive(master.get_analog(ANALOG_LEFT_Y),master.get_analog(ANALOG_RIGHT_X));
 	//intake
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			in.storage(127);
+			in.storage_middle(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
-			in.storage(-127);
+			in.storage(-127); // outtake
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
 			in.top_level(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
 			in.mid_level(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
-			in.storage_middle(127);
+			in.storage(127);
 		} else {
 			in.resting();
 		}
 
-	//matchload mech
+	//matchload mech and descore
 		if (master.get_digital(E_CONTROLLER_DIGITAL_UP) && (millis() - matchET > 500)){
 			match.open(); matchET = millis();
 		}
 		if (master.get_digital(E_CONTROLLER_DIGITAL_X) && (millis() - matchET > 500)){
-			match2.open(); matchET = millis();
+			blocker.open(); matchET = millis();
 		}
 	}
 }
