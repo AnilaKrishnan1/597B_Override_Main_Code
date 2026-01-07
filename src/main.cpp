@@ -66,7 +66,7 @@ void competition_initialize() {}
  */
 void autonomous() {
 	chassis.setPose(0,0,90);
-	chassis.moveToPoint(12,0,950,{.maxSpeed = 60});
+	chassis.moveToPoint(13,0,950,{.maxSpeed = 60});
 	c::delay(1500);
 	chassis.turnToHeading(90, 1300,{.maxSpeed = 40});
 	match.open(); 
@@ -91,7 +91,7 @@ void autonomous() {
 
 	chassis.setPose(0,0,0);
 	chassis.moveToPoint(0,4,400,{.maxSpeed = 60}); // moves back
-	in.storage(-127);
+	in.storage(-127); //outtakes blocks
 	c::delay(1500);
 	in.resting();
 	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
@@ -101,7 +101,7 @@ void autonomous() {
 	chassis.turnToHeading(-90, 1600,{.maxSpeed = 40});
 	match.open(); 
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(-15,-8,1100,{.maxSpeed = 100});
+	chassis.moveToPoint(-15,-8,1100,{.maxSpeed = 90}); // moves to matchload
 
 	blocker.open(); // opens blocker
 	in.storage(127); // intakes blocks from matchload
@@ -119,10 +119,14 @@ void autonomous() {
 	in.resting();
 	chassis.setPose(0,0,0);
 	chassis.moveToPoint(0,8,800,{.maxSpeed = 60}); // moves back
+	in.storage(-127); //outtakes blocks
 	c::delay(1500);
+	in.resting();
 	chassis.turnToHeading(-90, 1500,{.maxSpeed = 40});
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(6,18,3900,{.maxSpeed = 60}); // parks
+	chassis.moveToPoint(-18,-21,1500,{.maxSpeed = 200}); // parks
+	in.storage(-127); //outtakes blocks
+	c::delay(1500);
+	in.resting();
 }
   	
 
