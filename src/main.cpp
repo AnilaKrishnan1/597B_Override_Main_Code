@@ -66,20 +66,20 @@ void competition_initialize() {}
  */
 void autonomous() {
 	chassis.setPose(0,0,90);
-	chassis.moveToPoint(13,0,950,{.maxSpeed = 60});
+	chassis.moveToPoint(14,0,1000,{.maxSpeed = 60});
 	c::delay(1500);
 	chassis.turnToHeading(90, 1300,{.maxSpeed = 40});
 	match.open(); 
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(13,-4,1000,{.maxSpeed = 140}); // change after testing to be faster and ram into it
+	chassis.moveToPoint(13,-4,900,{.maxSpeed = 140}); // change after testing to be faster and ram into it
 	blocker.open(); 
 	in.storage(127); // intakes blocks from matchload
 	c::delay(3000); // change after testing -------
 	chassis.moveToPoint(13,-6,1000,{.maxSpeed = 140});
-	c::delay(1000);
+	c::delay(2000);
 	chassis.setPose(0,0,0);
 	
-	chassis.moveToPoint(-1,-10,1050,{.forwards = false,.maxSpeed = 60});
+	chassis.moveToPoint(-0.5,-8,950,{.forwards = false,.maxSpeed = 60});
 	in.resting();
 	c::delay(2000);
 	match.open(); // closes matchload
@@ -96,20 +96,20 @@ void autonomous() {
 	in.resting();
 	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(6,18,3900,{.maxSpeed = 60}); // moves across the field 
+	chassis.moveToPoint(4,21,3850,{.maxSpeed = 60}); // moves across the field 
 	chassis.setPose(0,0,0);
 	chassis.turnToHeading(-90, 1600,{.maxSpeed = 40});
 	match.open(); 
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(-15,-8,1100,{.maxSpeed = 90}); // moves to matchload
+	chassis.moveToPoint(-15,-8,900,{.maxSpeed = 80}); // moves to matchload
 
 	blocker.open(); // opens blocker
 	in.storage(127); // intakes blocks from matchload
 	c::delay(4000); // change after testing -------
 	chassis.moveToPoint(-15,-9,1000,{.maxSpeed = 90});
-	c::delay(2000); // change after testing -------
+	c::delay(3000); // change after testing -------
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(4,-5,980,{.forwards = false,.maxSpeed = 60}); // moves to score on high goal
+	chassis.moveToPoint(2,-4,940,{.forwards = false,.maxSpeed = 60}); // moves to score on high goal
 	match.open();
 	blocker.open();
 	c::delay(1000);
@@ -123,7 +123,7 @@ void autonomous() {
 	c::delay(1500);
 	in.resting();
 	chassis.turnToHeading(-90, 1500,{.maxSpeed = 40});
-	chassis.moveToPoint(-18,-21,1500,{.maxSpeed = 200}); // parks
+	chassis.moveToPoint(-20,-20,1600,{.maxSpeed = 200}); // parks
 	in.storage(-127); //outtakes blocks
 	c::delay(1500);
 	in.resting();
