@@ -65,21 +65,27 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	//chassis.setPose(0,0,90);
+	//chassis.moveToPoint(11,0,1100,{.forwards = false,.maxSpeed = 60});
 	chassis.setPose(0,0,90);
-	chassis.moveToPoint(14,0,1000,{.maxSpeed = 60});
+	chassis.moveToPoint(-9,0,900,{.forwards = false, .maxSpeed = 60});
+	chassis.moveToPoint(17,0,1300,{.maxSpeed = 200});
+	/*
+chassis.setPose(0,0,90);
+	chassis.moveToPoint(11,0,1100,{.maxSpeed = 60});
 	c::delay(1500);
 	chassis.turnToHeading(90, 1300,{.maxSpeed = 40});
 	match.open(); 
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(13,-4,900,{.maxSpeed = 140}); // change after testing to be faster and ram into it
+	chassis.moveToPoint(13,-4,1000,{.maxSpeed = 140}); // change after testing to be faster and ram into it
 	blocker.open(); 
 	in.storage(127); // intakes blocks from matchload
-	c::delay(3000); // change after testing -------
+	c::delay(3000); // change after testing --2133-----
 	chassis.moveToPoint(13,-6,1000,{.maxSpeed = 140});
-	c::delay(2000);
+	c::delay(1000);
 	chassis.setPose(0,0,0);
 	
-	chassis.moveToPoint(-0.5,-8,950,{.forwards = false,.maxSpeed = 60});
+	chassis.moveToPoint(0,-9,1100,{.forwards = false,.maxSpeed = 60});
 	in.resting();
 	c::delay(2000);
 	match.open(); // closes matchload
@@ -90,13 +96,13 @@ void autonomous() {
 	in.resting();
 
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,4,400,{.maxSpeed = 60}); // moves back
+	chassis.moveToPoint(0,5,500,{.maxSpeed = 60}); // moves back
 	in.storage(-127); //outtakes blocks
 	c::delay(1500);
 	in.resting();
 	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(4,21,3850,{.maxSpeed = 60}); // moves across the field 
+	chassis.moveToPoint(4,28,4200,{.maxSpeed = 60}); // moves across the field 
 	chassis.setPose(0,0,0);
 	chassis.turnToHeading(-90, 1600,{.maxSpeed = 40});
 	match.open(); 
@@ -109,7 +115,7 @@ void autonomous() {
 	chassis.moveToPoint(-15,-9,1000,{.maxSpeed = 90});
 	c::delay(3000); // change after testing -------
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(2,-4,940,{.forwards = false,.maxSpeed = 60}); // moves to score on high goal
+	chassis.moveToPoint(2,-3,900,{.forwards = false,.maxSpeed = 60}); // moves to score on high goal
 	match.open();
 	blocker.open();
 	c::delay(1000);
@@ -118,15 +124,17 @@ void autonomous() {
 
 	in.resting();
 	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,8,800,{.maxSpeed = 60}); // moves back
+	chassis.moveToPoint(0,7,900,{.maxSpeed = 60}); // moves back
 	in.storage(-127); //outtakes blocks
 	c::delay(1500);
 	in.resting();
 	chassis.turnToHeading(-90, 1500,{.maxSpeed = 40});
-	chassis.moveToPoint(-20,-20,1600,{.maxSpeed = 200}); // parks
+	c::delay(1000);
+	chassis.moveToPoint(-25,-15,2000,{.maxSpeed = 200}); // parks
 	in.storage(-127); //outtakes blocks
 	c::delay(1500);
 	in.resting();
+	*/
 }
   	
 
