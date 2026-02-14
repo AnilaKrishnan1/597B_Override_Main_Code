@@ -65,11 +65,46 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	//chassis.setPose(0,0,90);
-	//chassis.moveToPoint(11,0,1100,{.forwards = false,.maxSpeed = 60});
-	chassis.setPose(0,0,90);
-	chassis.moveToPoint(-9,0,900,{.forwards = false, .maxSpeed = 60});
-	chassis.moveToPoint(17,0,1300,{.maxSpeed = 200});
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(0,-6,500,{.forwards = false,.maxSpeed = 60});
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(0,10,800,{.maxSpeed = 200});
+	/*
+	chassis.turnToHeading(90, 1300,{.maxSpeed = 40});
+	match.open(); 
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(13,-4,1000,{.maxSpeed = 140}); // change after testing to be faster and ram into it
+	blocker.open(); 
+	in.storage(127); // intakes blocks from matchload
+	c::delay(3000); // change after testing --2133-----
+	chassis.moveToPoint(13,-6,1000,{.maxSpeed = 140});
+	c::delay(1000);
+	chassis.setPose(0,0,0);
+	
+	chassis.moveToPoint(0,-8.5,1000,{.forwards = false,.maxSpeed = 60});
+	in.resting();
+	c::delay(2000);
+	match.open(); // closes matchload
+	blocker.open(); 
+	c::delay(1000);
+	in.top_level(127); //scores on high goal
+	c::delay(6000); // change after testing ------
+	in.resting();
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(0,-3,800,{.forwards = false,.maxSpeed = 60});
+
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(0,3,400,{.maxSpeed = 60}); // moves back
+	in.storage(-127); //outtakes blocks
+	c::delay(1500);
+	in.resting();
+	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(4,18,1000,{.maxSpeed = 60}); // moves across the field 
+	chassis.setPose(0,0,0);
+	chassis.turnToHeading(-90, 1600,{.maxSpeed = 40});
+	chassis.setPose(0,0,0);
+	chassis.moveToPoint(0,-8.5,1000,{.forwards = false,.maxSpeed = 60});
 	/*
 chassis.setPose(0,0,90);
 	chassis.moveToPoint(11,0,1100,{.maxSpeed = 60});
