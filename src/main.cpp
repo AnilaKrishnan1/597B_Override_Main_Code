@@ -60,7 +60,11 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	 
+	chassis.reset_pid_targets(); // Resets PID targets to 0
+  chassis.reset_gyro(); // Reset gyro position to 0
+  chassis.reset_drive_sensor(); // Reset drive sensors to 0
+  chassis.set_drive_brake(MOTOR_BRAKE_HOLD); // Set motors to hold.  This helps autonomous consistency.
+
 }
   	
 
@@ -85,7 +89,7 @@ void opcontrol() {
 	int matchET = 0;
 	while (true) {
 	//tankdrive
-		arcadeDrive(master.get_analog(ANALOG_LEFT_Y),master.get_analog(ANALOG_RIGHT_X));
+	
 	//intake
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
 			in.storage_middle(127);
