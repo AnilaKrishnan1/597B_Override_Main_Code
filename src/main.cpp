@@ -5,11 +5,6 @@
 //#include <pros/screen.hpp>
 #include "matchload.hpp"
 #include "matchload2.hpp"
-//#include lemlib
-#include "lemlib/api.hpp" // IWYU pragma: keep
-#include "lemlib-tarball/api.hpp"
-ASSET(lowerGoalScorePath_txt);
-lemlib_tarball::Decoder decoder(lowerGoalScorePath_txt);
 
 using namespace pros;
 Intake in;
@@ -65,82 +60,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	chassis.setPose(0,0,90);
-	chassis.moveToPoint(11,0,1000,{.maxSpeed = 60});
-	c::delay(1500);
-	chassis.turnToHeading(90, 1300,{.maxSpeed = 40});
-	match.open(); 
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(13,-4,1000,{.maxSpeed = 140}); // change after testing to be faster and ram into it
-	blocker.open(); 
-	in.storage(127); // intakes blocks from matchload
-	c::delay(2000); // change after testing 
-	chassis.moveToPoint(13,-5,1000,{.maxSpeed = 140});
-	c::delay(2000);
-	chassis.moveToPoint(13,-7,1000,{.maxSpeed = 140});
-	c::delay(2000);
-	chassis.setPose(0,0,0);
-	chassis.turnToHeading(3, 300,{.maxSpeed = 40});
 	
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,-11,1000,{.forwards = false,.maxSpeed = 60});
-	in.resting();
-	c::delay(1000);
-	match.open(); // closes matchload
-	blocker.open(); 
-	c::delay(1000);
-	in.top_level(127); //scores on high goal
-	c::delay(4000); // change after testing ------
-	in.resting();
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,2,400,{.forwards = true,.maxSpeed = 60});
-	c::delay(500);
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,-5,800,{.forwards = false,.maxSpeed = 80});// gets control
-
-	c::delay(2000);
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,4,300,{.maxSpeed = 60}); // moves back
-	in.storage(-127); //outtakes blocks
-	c::delay(1500);
-	in.resting();
-	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(6,40,5000,{.maxSpeed = 60}); // moves across the field 
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,-5,200,{.forwards = false, .maxSpeed = 60}); // moves back
-	chassis.setPose(0,0,0);
-	chassis.turnToHeading(-90, 1600,{.maxSpeed = 40});
-	match.open(); 
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(-15,-8,900,{.maxSpeed = 80}); // moves to matchload
-
-	blocker.open(); // opens blocker
-	in.storage(127); // intakes blocks from matchload
-	c::delay(4000); // change after testing -------
-	chassis.moveToPoint(-15,-9,1000,{.maxSpeed = 90});
-	c::delay(3000); // change after testing -------
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(2,-3,900,{.forwards = false,.maxSpeed = 60}); // moves to score on high goal
-	match.open();
-	blocker.open();
-	c::delay(1000);
-	in.top_level(127); //scores on high goal
-	c::delay(6000); // change after testing ------
-/*
-	in.resting();
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,7,900,{.maxSpeed = 60}); // moves back
-	in.storage(-127); //outtakes blocks
-	c::delay(1500);
-	in.resting();
-	chassis.turnToHeading(-90, 1500,{.maxSpeed = 40});
-	c::delay(1000);
-	chassis.moveToPoint(-25,-15,2000,{.maxSpeed = 200}); // parks
-	in.storage(-127); //outtakes blocks
-	c::delay(1500);
-	in.resting();
-	*/
 }
   	
 
@@ -191,42 +111,3 @@ void opcontrol() {
 	}
 }
 
-
-
-
-// matchload 3 pseudocode
-
-/*
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,10,1100,{.maxSpeed = 60}); // moves back
-	chassis.setPose(0,0,0);
-	chassis.turnToHeading(-90, 1500,{.maxSpeed = 40});
-	chassis.moveToPoint(10,0,800,{.maxSpeed = 60}); // moves right
-	chassis.turnToHeading(0, 1500,{.maxSpeed = 40});
-	chassis.setPose(0,0,0);
-	chassis.moveToPoint(0,30,4000,{.maxSpeed = 60}); // moves across left long goal
-	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
-	chassis.moveToPoint(10,0,800,{.maxSpeed = 60}); // moves left towards matchload
-	chassis.turnToHeading(90, 1500,{.maxSpeed = 40});
-	chassis.setPose(0,0,0);
-*/
-
-/*
-
-	match.open(); //opens matchload
-	chassis.moveToPoint(0,15,1100,{.maxSpeed = 60});
-	in.storage(127); // intakes blocks from matchload
-	c::delay(4000); // change after testing -------
-	chassis.setPose(0,0,0);
-*/
-
-/*
-	chassis.moveToPoint(0,-10,1400,{.forwards = false,.maxSpeed = 60});
-	in.resting();
-	blocker.open(); 
-	c::delay(2000);
-	match.open(); // closes matchload
-	in.top_level(127); //scores on high goal
-	c::delay(6000); // change after testing ------
-	in.resting();
-*/
