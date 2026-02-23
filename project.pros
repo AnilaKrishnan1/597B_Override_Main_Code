@@ -654,7 +654,7 @@
     "upload_options": {
       "description": "Main code testing for major errors",
       "icon": "ufo",
-      "slot": 3
+      "slot": 4
     },
     "use_early_access": false
   }
