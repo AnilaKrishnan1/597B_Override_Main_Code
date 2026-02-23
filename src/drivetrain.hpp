@@ -4,6 +4,7 @@
 using namespace pros;
 using namespace Constants;
 #include "pros/motor_group.hpp"
+#include "lemlib/api.hpp"
 pros::MotorGroup leftMotors({ld1_p, -ld2_p, -ld3_p},
                             pros::MotorGearset::blue); // left motor group 
 pros::MotorGroup rightMotors({-rd1_p, rd2_p, rd3_p}, pros::MotorGearset::blue); // right motor group 
@@ -12,9 +13,26 @@ pros::MotorGroup rightMotors({-rd1_p, rd2_p, rd3_p}, pros::MotorGearset::blue); 
 pros::Rotation horizontalEnc(horizontal_p);
 // vertical tracking wheel encoder. Rotation sensor, port 11, reversed
 pros::Rotation verticalEnc(vertical_p);
+// horizontal tracking wheel. 2.75" diameter, 5.75" offset, back of the robot (negative)
+lemlib::TrackingWheel horizontal(&horizontalEnc, lemlib::Omniwheel::OLD_275, -5.75);
 
+// MEASURE OFFSET WHEN ON THE ROBOT
+
+// vertical tracking wheel. 2.75" diameter, 2.5" offset, left of the robot (negative)
+lemlib::TrackingWheel vertical(&verticalEnc, lemlib::Omniwheel::OLD_275, -2.5);
 
 pros::Imu imu(inertial_p);
+
+lemlib::OdomSensors sensors(&vertical, nullptr, &horizontal, nullptr, &imu);
+
+// drivetrain settings
+lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
+                              &rightMotors, // right motor group
+                              12, // 12 inch track width
+                              lemlib::Omniwheel::OLD_275, // using new 2.75" omnis
+                              360, // drivetrain rpm is 360
+                              2 // horizontal drift is 2. If we had traction wheels, it would have been 8
+);
 
  inline void tankDrive(int leftY, int rightY){
     rightMotors.move(rightY);
@@ -58,8 +76,51 @@ class DriveTrain {
 };
 */
 
+// include lemlib
+// lateral motion controller
+lemlib::ControllerSettings linearController(10, // proportional gain (kP)
+                                            0, // integral gain (kI)
+                                            3, // derivative gain (kD)
+                                            3, // anti windup
+                                            1, // small error range, in inches
+                                            100, // small error range timeout, in milliseconds
+                                            3, // large error range, in inches
+                                            500, // large error range timeout, in milliseconds
+                                            20 // maximum acceleration (slew)
+);
 
+// angular motion controller
+lemlib::ControllerSettings angularController(2, // proportional gain (kP)
+                                             0, // integral gain (kI)
+                                             10, // derivative gain (kD)
+                                             3, // anti windup
+                                             1, // small error range, in degrees
+                                             100, // small error range timeout, in milliseconds
+                                             3, // large error range, in degrees
+                                             500, // large error range timeout, in milliseconds
+                                             0 // maximum acceleration (slew)
+);
 
+// input curve for throttle input during driver control
+lemlib::ExpoDriveCurve throttleCurve(3, // joystick deadband out of 127
+                                     10, // minimum output where drivetrain will move out of 127
+                                     1.019 // expo curve gain
+);
+
+// input curve for steer input during driver control
+lemlib::ExpoDriveCurve steerCurve(3, // joystick deadband out of 127
+                                  10, // minimum output where drivetrain will move out of 127
+                                  1.019 // expo curve gain
+);
+
+// create the chassis
+lemlib::Chassis chassis(drivetrain, linearController,angularController, sensors, &throttleCurve, &steerCurve);
+
+void follow(const asset &path, double lookahead = 10, int timeout = 3000) {
+    chassis.follow(path, lookahead, timeout, true, false);
+    }
+  
+    void resetCoordinateSystem() { chassis.setPose(0, 0, 0); }
     
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -69,6 +130,7 @@ class DriveTrain {
  */
 void initialize() {
     pros::lcd::initialize(); // initialize brain screen
+    chassis.calibrate(); // calibrate sensors
 
     // the default rate is 50. however, if you need to change the rate, you
     // can do the following.
@@ -79,3 +141,25 @@ void initialize() {
     // works, refer to the fmtlib docs
 
     // thread to for brain screen and position logging
+<<<<<<< HEAD
+}
+=======
+    pros::Task screenTask([&]() {
+        while (true) {
+            // print robot location to the brain screen
+            pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
+            pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
+            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+            // log position telemetry
+            lemlib::telemetrySink()->info("Chassis pose: {}", chassis.getPose());
+            // delay to save resources
+            pros::delay(50);
+        }
+    });
+
+}
+ 
+
+// get a path used for pure pursuit
+// this needs to be put outside a function
+>>>>>>> parent of fd12cfc (Getting rid of Lemlib)
