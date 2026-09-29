@@ -1,6 +1,7 @@
 #include "main.h"
 #include "drivetrain.hpp"
 #include "intake.hpp"
+#include "constants.hpp"
 #include "autons.hpp"
 //#include "vex.h"
 //#include <pros/screen.hpp>
@@ -8,9 +9,6 @@
 #include "matchload2.hpp"
 
 using namespace pros;
-Intake in;
-Matchload match;
-Matchload2 blocker;
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
 // https://ez-robotics.github.io/EZ-Template/
@@ -159,7 +157,7 @@ void ez_template_extras() {
 void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
-  int matchET = 0;
+  Motor Cascade= Motor(cascade);
   while (true) {
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();
@@ -171,28 +169,22 @@ void opcontrol() {
     // chassis.opcontrol_arcade_flipped(ez::SINGLE);   // Flipped single arcade
    	//intake
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			in.storage_middle(127);
+			Cascade.move(127);
+
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
-			in.storage(-127); // outtake
+			Cascade.move(-127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			in.top_level(127);
+			//
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
-			in.mid_level(127);
+			//
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
-			in.storage(127);
+			//
 		} else {
-			in.resting();
+			//
 		}
 
-	//matchload mech and descore
-		if (master.get_digital(E_CONTROLLER_DIGITAL_UP) && (millis() - matchET > 500)){
-			match.open(); matchET = millis();
-		}
-		if (master.get_digital(E_CONTROLLER_DIGITAL_X) && (millis() - matchET > 500)){
-			blocker.open(); matchET = millis();
-		}
-	}
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
+}
 
