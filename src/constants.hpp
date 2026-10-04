@@ -19,8 +19,8 @@ namespace Constants {
     //intakes
     static constexpr unsigned char intake_top_p = 4;
     static constexpr unsigned char intake_mid_p = 7;
-    static constexpr unsigned char intake_btm_p = 9;
-
+    static constexpr unsigned char intake_btm_p = 3;
+    static constexpr unsigned char intake = 9;
 
     //cascade
     static constexpr unsigned char cascade = 1; //Cascade up and down motor
