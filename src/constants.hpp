@@ -14,20 +14,16 @@ namespace Constants {
     static constexpr unsigned char ld2_p = 11; //5.5W left
     static constexpr unsigned char ld3_p = 2; //End left
 
+    
     //intake
-   // static constexpr unsigned char intake = 9;
-    //intakes
-    static constexpr unsigned char intake_top_p = 4;
-    static constexpr unsigned char intake_mid_p = 7;
-    static constexpr unsigned char intake_btm_p = 3;
     static constexpr unsigned char intake = 9;
 
     //cascade
     static constexpr unsigned char cascade = 1; //Cascade up and down motor
+
+    //claw
     static constexpr unsigned char clawIn = 10; //Claw motor to collect pins/cups
     static constexpr unsigned char clawTurn = 10; //Claw motor to turn claw
-
-
 
     //sensors
     static constexpr unsigned char horizontal_p = 3;
@@ -38,10 +34,6 @@ namespace Constants {
     constexpr double gear_ratio = ((double)36/60); 
     constexpr double wheel_circumference = 2.75;
     constexpr double start_heading = 90;
-
-        //piston
-    static constexpr unsigned char Matchloader_p = 'A';
-    static constexpr unsigned char Matchloader_p2 = 'B';
 
     //drivetrain
     constexpr int threshold = 10; // Joystick deadzone (7–10%)

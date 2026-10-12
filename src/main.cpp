@@ -3,10 +3,9 @@
 #include "intake.hpp"
 #include "constants.hpp"
 #include "autons.hpp"
+#include "cascade.hpp"
 //#include "vex.h"
 //#include <pros/screen.hpp>
-#include "matchload.hpp"
-#include "matchload2.hpp"
 
 using namespace pros;
 /////
@@ -157,9 +156,7 @@ void ez_template_extras() {
 void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
-  Motor Cascade= Motor(cascade);
-  Motor Intake = Motor(intake);
-  Motor Clawin = Motor(clawIn);
+  
   while (true) {
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();
@@ -171,15 +168,14 @@ void opcontrol() {
     // chassis.opcontrol_arcade_flipped(ez::SINGLE);   // Flipped single arcade
    	//intake
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			Cascade.move(127);
+			
 
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
-			Cascade.move(-127);
+			
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			Intake.move(127);
-      Clawin.move(50);
+			
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
-			//xIntake.move(-127);
+			//Intake.move(-127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
 			//Clawin.move(127);
 		} else {
@@ -190,4 +186,3 @@ void opcontrol() {
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
 }
-
