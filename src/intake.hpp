@@ -9,7 +9,7 @@ using namespace Constants;
 class Intake{
     public:
     //initialize motor
-    Motor IntakeMtr = Motor(intake);
+    Motor IntakeMtr = Motor(intakeMtr);
     Motor ClawinMtr = Motor(clawIn);
     Intake(){
     IntakeMtr.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);

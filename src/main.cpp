@@ -6,8 +6,9 @@
 #include "cascade.hpp"
 //#include "vex.h"
 //#include <pros/screen.hpp>
-
 using namespace pros;
+Intake intake;
+Cascade cascade;
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
 // https://ez-robotics.github.io/EZ-Template/
@@ -168,16 +169,15 @@ void opcontrol() {
     // chassis.opcontrol_arcade_flipped(ez::SINGLE);   // Flipped single arcade
    	//intake
 		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-			
-
+			intake.in(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
-			
+			intake.out(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			
+			cascade.allDown(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
-			//Intake.move(-127);
+			cascade.allUp(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
-			//Clawin.move(127);
+			
 		} else {
 			//
 		}

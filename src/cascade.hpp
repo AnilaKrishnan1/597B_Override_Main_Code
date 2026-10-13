@@ -9,7 +9,7 @@ using namespace Constants;
 class Cascade{
     public:
     //initialize motor
-    Motor CascadeMtr = Motor(cascade);
+    Motor CascadeMtr = Motor(cascadeMtr);
     Motor ClawturnMtr = Motor(clawIn);
     Cascade(){
     CascadeMtr.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);

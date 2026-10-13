@@ -12,18 +12,18 @@ namespace Constants {
     //left drivetrain
     static constexpr unsigned char ld1_p = 12; //Front left
     static constexpr unsigned char ld2_p = 11; //5.5W left
-    static constexpr unsigned char ld3_p = 2; //End left
+    static constexpr unsigned char ld3_p = 11; //End left
 
     
     //intake
-    static constexpr unsigned char intake = 9;
+    static constexpr unsigned char intakeMtr = 9;
 
     //cascade
-    static constexpr unsigned char cascade = 1; //Cascade up and down motor
+    static constexpr unsigned char cascadeMtr = 1; //Cascade up and down motor
 
     //claw
-    static constexpr unsigned char clawIn = 10; //Claw motor to collect pins/cups
-    static constexpr unsigned char clawTurn = 10; //Claw motor to turn claw
+    static constexpr unsigned char clawIn = 2; //Claw motor to collect pins/cups
+    static constexpr unsigned char clawTurn = 6; //Claw motor to turn claw
 
     //sensors
     static constexpr unsigned char horizontal_p = 3;
