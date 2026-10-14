@@ -16,8 +16,8 @@ using namespace Constants;
 // Chassis constructor
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {ld1_p, -ld2_p, -ld3_p},     // Left Chassis Ports (negative port will reverse it!)
-    {-rd1_p, rd2_p, rd3_p},  // Right Chassis Ports (negative port will reverse it!)
+    {-ld1_p, -ld2_p, -ld3_p},     // Left Chassis Ports (negative port will reverse it!)
+    {rd1_p, rd2_p, rd3_p},  // Right Chassis Ports (negative port will reverse it!)
 
     inertial_p,      // IMU Port
     2.75,  // Wheel Diameter 

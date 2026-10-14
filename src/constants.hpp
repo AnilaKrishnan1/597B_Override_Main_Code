@@ -17,12 +17,12 @@ namespace Constants {
     
     //intake
     static constexpr unsigned char intakeMtr = 4;
-
+// mwahahahhahahha
     //cascade
-    static constexpr unsigned char cascadeMtr = 1; //Cascade up and down motor
+    static constexpr unsigned char cascadeMtr = 5; //Cascade up and down motor
 
     //claw
-    static constexpr unsigned char clawIn = 5; //Claw motor to collect pins/cups
+    static constexpr unsigned char clawIn = 1; //Claw motor to collect pins/cups
     static constexpr unsigned char clawTurn = 6; //Claw motor to turn claw
 
     //sensors
