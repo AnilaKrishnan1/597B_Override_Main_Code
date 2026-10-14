@@ -20,8 +20,8 @@ ez::Drive chassis(
     {-rd1_p, rd2_p, rd3_p},  // Right Chassis Ports (negative port will reverse it!)
 
     inertial_p,      // IMU Port
-    2.75,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
-    360);   // Wheel RPM = cartridge * (motor gear / wheel gear)
+    2.75,  // Wheel Diameter 
+    450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
 // Uncomment the trackers you're using here!
 // - `horizontal_p` and `vertical_p` are smart ports (making these negative will reverse the sensor)

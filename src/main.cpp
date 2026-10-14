@@ -179,7 +179,7 @@ void opcontrol() {
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
 			
 		} else {
-			//
+			intake.in(0);
 		}
 
 
