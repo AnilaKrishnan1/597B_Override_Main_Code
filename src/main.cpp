@@ -173,13 +173,14 @@ void opcontrol() {
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
 			intake.out(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-			cascade.allDown(127);
+			cascade.allDown(70);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
 			cascade.allUp(127);
 		} else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_A)){
 			
 		} else {
 			intake.in(0);
+      cascade.allUp(0);
 		}
 
 
